@@ -9,21 +9,24 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\UserComicController;
 
-Route::get('/', [ComicController::class, 'index'])->name('comic.index');
-Route::get('/comics/create', [ComicController::class, 'create'])->name('comic.create');
-Route::post('/comics', [ComicController::class, 'store'])->name('comic.store');
-Route::get('/comics/{id}', [ComicController::class, 'show'])->name('comic.show');
-Route::get('/comics/{id}/edit', [ComicController::class, 'edit'])->name('comic.edit');
-Route::put('/comics/{id}', [ComicController::class, 'update'])->name('comic.update');
-Route::delete('/comics/{id}', [ComicController::class, 'destroy'])->name('comic.destroy');
+Route::get('/', [ComicController::class, 'index'])->name('home');
+Route::get('comics/create', [ComicController::class, 'create'])->name('comics.create');
+Route::post('comics', [ComicController::class, 'store'])->name('comics.store');
+Route::get('comics/{id}', [ComicController::class, 'show'])->name('comics.show');
+Route::get('comics/{id}/edit', [ComicController::class, 'edit'])->name('comics.edit');
+Route::put('comics/{id}', [ComicController::class, 'update'])->name('comics.update');
+Route::delete('comics/{id}', [ComicController::class, 'destroy'])->name('comics.destroy');
 
-Route::get('/authors', [AuthorController::class, 'index'])->name('author.index');
-Route::get('/authors/create', [AuthorController::class, 'create'])->name('author.create');
-Route::post('/authors', [AuthorController::class, 'store'])->name('author.store');
-Route::get('/authors/{id}', [AuthorController::class, 'show'])->name('author.show');
-Route::get('/authors/{id}/edit', [AuthorController::class, 'edit'])->name('author.edit');
-Route::put('/authors/{id}', [AuthorController::class, 'update'])->name('author.update');
-Route::delete('/authors/{id}', [AuthorController::class, 'destroy'])->name('author.destroy');
+
+Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
+Route::get('/authors/create', [AuthorController::class, 'create'])->name('authors.create');
+Route::post('/authors', [AuthorController::class, 'store'])->name('authors.store');
+Route::get('/authors/{id}', [AuthorController::class, 'show'])->name('authors.show');
+Route::get('/authors/{id}/edit', [AuthorController::class, 'edit'])->name('authors.edit');
+Route::put('/authors/{id}', [AuthorController::class, 'update'])->name('authors.update');
+Route::delete('/authors/{id}', [AuthorController::class, 'destroy'])->name('authors.destroy');
+
+//
 
 Route::get('/chapters', [ChapterController::class, 'index'])->name('chapter.index');
 Route::get('/chapters/create', [ChapterController::class, 'create'])->name('chapter.create');
