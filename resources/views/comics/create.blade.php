@@ -1,44 +1,53 @@
 <!-- resources/views/comics/create.blade.php -->
 
-<h1>Create New Comic</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm mới truyện tranh</title>
+</head>
+<body>
+    <h1>Thêm mới truyện tranh</h1>
 
-<form action="{{ route('comics.store') }}" method="POST">
-    @csrf
+    <form action="{{ route('comics.store') }}" method="post" enctype="multipart/form-data">
+        @csrf
 
-    <div>
-        <label for="comicName">Comic Name:</label>
-        <input type="text" id="comicName" name="ComicName" required>
-    </div>
+        <div>
+            <label for="ComicName">Tên truyện:</label>
+            <input type="text" id="ComicName" name="ComicName" required>
+        </div>
 
-    <div>
-        <label for="description">Description:</label>
-        <textarea id="description" name="Description"></textarea>
-    </div>
+        <div>
+            <label for="Description">Mô tả:</label>
+            <textarea id="Description" name="Description"></textarea>
+        </div>
 
-    <div>
-        <label for="authorID">Author ID:</label>
-        <input type="text" id="authorID" name="AuthorID" required>
-    </div>
+        <div>
+            <label for="AuthorID">ID Tác giả:</label>
+            <input type="text" id="AuthorID" name="AuthorID" required>
+        </div>
 
-    <div>
-        <label for="genre">Genre:</label>
-        <input type="text" id="genre" name="Genre">
-    </div>
+        <div>
+            <label for="Genre">Thể loại:</label>
+            <input type="text" id="Genre" name="Genre">
+        </div>
 
-    <div>
-        <label for="status">Status:</label>
-        <input type="text" id="status" name="Status">
-    </div>
+        <div>
+            <label for="Status">Trạng thái:</label>
+            <input type="text" id="Status" name="Status">
+        </div>
 
-    <div>
-        <label for="uploadDate">Upload Date:</label>
-        <input type="text" id="uploadDate" name="UploadDate">
-    </div>
+        <div>
+            <label for="ThumbnailImage">Ảnh bìa:</label>
+            <input type="file" id="ThumbnailImage" name="ThumbnailImage">
+        </div>
 
-    <div>
-        <label for="thumbnailImage">Thumbnail Image:</label>
-        <input type="text" id="thumbnailImage" name="ThumbnailImage">
-    </div>
+        <div>
+            <button type="submit">Lưu</button>
+        </div>
+    </form>
 
-    <button type="submit">Create</button>
-</form>
+    <a href="{{ route('home') }}">Quay lại</a>
+</body>
+</html>

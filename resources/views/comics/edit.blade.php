@@ -1,37 +1,55 @@
 <!-- resources/views/comics/edit.blade.php -->
 
-<h1>Edit Comic</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa truyện tranh</title>
+</head>
+<body>
+    <h1>Chỉnh sửa truyện tranh: {{ $comic->ComicName }}</h1>
 
-<form action="{{ route('comics.update', $comic->ComicID) }}" method="POST">
-    @csrf
-    @method('PUT')
+    <form action="{{ route('comics.update', $comic->ComicID) }}" method="post" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
 
-    <label for="comicName">Comic Name:</label>
-    <input type="text" id="comicName" name="ComicName" value="{{ $comic->ComicName }}" required>
+        <div>
+            <label for="ComicName">Tên truyện:</label>
+            <input type="text" id="ComicName" name="ComicName" value="{{ $comic->ComicName }}" required>
+        </div>
 
-    <label for="description">Description:</label>
-    <textarea id="description" name="Description" rows="3">{{ $comic->Description }}</textarea>
+        <div>
+            <label for="Description">Mô tả:</label>
+            <textarea id="Description" name="Description">{{ $comic->Description }}</textarea>
+        </div>
 
-    <label for="author">Author:</label>
-    <select id="author" name="AuthorID">
-        @foreach ($authors as $author)
-            <option value="{{ $author->AuthorID }}" {{ $author->AuthorID == $comic->AuthorID ? 'selected' : '' }}>
-                {{ $author->AuthorName }}
-            </option>
-        @endforeach
-    </select>
+        <div>
+            <label for="AuthorID">ID Tác giả:</label>
+            <input type="text" id="AuthorID" name="AuthorID" value="{{ $comic->AuthorID }}" required>
+        </div>
 
-    <label for="genre">Genre:</label>
-    <input type="text" id="genre" name="Genre" value="{{ $comic->Genre }}">
+        <div>
+            <label for="Genre">Thể loại:</label>
+            <input type="text" id="Genre" name="Genre" value="{{ $comic->Genre }}">
+        </div>
 
-    <label for="status">Status:</label>
-    <input type="text" id="status" name="Status" value="{{ $comic->Status }}">
+        <div>
+            <label for="Status">Trạng thái:</label>
+            <input type="text" id="Status" name="Status" value="{{ $comic->Status }}">
+        </div>
 
-    <label for="uploadDate">Upload Date:</label>
-    <input type="text" id="uploadDate" name="UploadDate" value="{{ $comic->UploadDate }}">
+        <div>
+            <label for="ThumbnailImage">Ảnh bìa:</label>
+            <input type="file" id="ThumbnailImage" name="ThumbnailImage">
+            <img src="{{ $comic->ThumbnailImage }}" alt="Current Thumbnail">
+        </div>
 
-    <label for="thumbnailImage">Thumbnail Image:</label>
-    <input type="text" id="thumbnailImage" name="ThumbnailImage" value="{{ $comic->ThumbnailImage }}">
+        <div>
+            <button type="submit">Cập nhật</button>
+        </div>
+    </form>
 
-    <button type="submit">Update</button>
-</form>
+    <a href="{{ route('comics.show', $comic->ComicID) }}">Quay lại</a>
+</body>
+</html>

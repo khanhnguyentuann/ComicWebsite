@@ -8,7 +8,7 @@ return new class extends Migration {
     /**
      * Run the migrations.
      */
-    
+
     public function up()
     {
         Schema::create('comics', function (Blueprint $table) {
@@ -20,10 +20,12 @@ return new class extends Migration {
             $table->string('Status')->nullable();
             $table->timestamp('UploadDate')->useCurrent();
             $table->string('ThumbnailImage')->nullable();
+            $table->timestamps();
 
             $table->foreign('AuthorID')->references('AuthorID')->on('authors');
         });
     }
+
 
 
     /**

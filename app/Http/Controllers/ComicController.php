@@ -3,17 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Comic; // dòng mới thêm vào
+use App\Models\Comic;
 
 class ComicController extends Controller
 {
     public function index()
     {
-        // Lấy danh sách truyện tranh từ cơ sở dữ liệu
         $comics = Comic::all();
-
-        // Trả về view home và truyền dữ liệu truyện tranh
-        return view('home', ['comics' => $comics]);
+        return view('comics.index', ['comics' => $comics]);
     }
 
     public function create()
@@ -23,9 +20,26 @@ class ComicController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'ComicName' => 'required|max:255',
+            'Description' => 'nullable',
+            'AuthorID' => 'required',
+            'Genre' => 'nullable',
+            'Status' => 'nullable',
+            'ThumbnailImage' => 'nullable|image',
+        ]);
+
         $comic = new Comic;
-        $comic->title = $request->input('title');
-        // Set the other fields...
+        $comic->ComicName = $request->input('ComicName');
+        $comic->Description = $request->input('Description');
+        $comic->AuthorID = $request->input('AuthorID');
+        $comic->Genre = $request->input('Genre');
+        $comic->Status = $request->input('Status');
+
+        if($request->hasFile('ThumbnailImage')) {
+            $comic->ThumbnailImage = $request->file('ThumbnailImage')->store('images');
+        }
+
         $comic->save();
 
         return redirect()->route('comics.index');
@@ -45,9 +59,26 @@ class ComicController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'ComicName' => 'required|max:255',
+            'Description' => 'nullable',
+            'AuthorID' => 'required',
+            'Genre' => 'nullable',
+            'Status' => 'nullable',
+            'ThumbnailImage' => 'nullable|image',
+        ]);
+
         $comic = Comic::findOrFail($id);
-        $comic->title = $request->input('title');
-        // Update the other fields...
+        $comic->ComicName = $request->input('ComicName');
+        $comic->Description = $request->input('Description');
+        $comic->AuthorID = $request->input('AuthorID');
+        $comic->Genre = $request->input('Genre');
+        $comic->Status = $request->input('Status');
+
+        if($request->hasFile('ThumbnailImage')) {
+            $comic->ThumbnailImage = $request->file('ThumbnailImage')->store('images');
+        }
+
         $comic->save();
 
         return redirect()->route('comics.index');
